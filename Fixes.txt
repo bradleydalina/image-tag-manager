@@ -96,7 +96,7 @@ image-tag-manager/inc/tabs/tag-settings.php:5: ___ITMPluginSettings
    {
 
    --------------------------------------------------------------
-   Then I have updated it to a more meaningful and understandable name.
+   Then I have updated it to a more better name.
 
    > $_POST['ITMPlugin_action'] equivalent as $_GET['action'] but using POST not GET
    > $_POST['ITMPlugin_nonce'] equivalent as $_GET['nonce']
