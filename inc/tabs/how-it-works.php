@@ -3,7 +3,7 @@
         /**
         * Get the current upload directory
         */
-        $uploads_dir= wp_get_upload_dir()["url"];
+        $uploads_dir= trailingslashit(wp_get_upload_dir()["url"]);
     ?>
     <h2>How It Works?</h2>
     <div class="t-wrap">
@@ -38,11 +38,11 @@
             <br/>
             <small class="t-guide">After:</small>
             <pre class="t-code">&lt;img <b>title="<strong>Hello World</strong>"</b> src="<?php echo $uploads_dir;?><b>hello-world</b>.jpg" <b>alt="<strong>Hello World</strong>"</b> class="wp-image-3427"&gt;</pre>
-            <br/><br/>
+            <!-- <br/><br/>
             <span class="t-status">If "Add Post/Page or Site title " is checked, this will append the attachment page title or the site title at the end of the image alt or title tag.  applicable on the entry post or page article only.</span><br/>
             <br/>
             <small class="t-guide">After:</small>
-            <pre class="t-code">&lt;img title="<b>Bradley Dalina <strong>- Hello World</strong></b>" src="<?php echo $uploads_dir;?>/bradley-dalina.jpg" alt="<b>Bradley Dalina<strong> - Hello World</strong></b>" class="wp-image-3427"&gt;<br/><br/>&lt;img title="<b>Bradley Dalina <strong>- Hello World - <?php bloginfo('name');?></strong></b>" src="<?php echo $uploads_dir;?>bradley-dalina.jpg" alt="<b>Bradley Dalina<strong> - Hello World - <?php bloginfo('name');?></strong></b>" class="wp-image-3427"&gt;</pre>
+            <pre class="t-code">&lt;img title="<b>Bradley Dalina <strong>- Hello World</strong></b>" src="<?php echo $uploads_dir;?>/bradley-dalina.jpg" alt="<b>Bradley Dalina<strong> - Hello World</strong></b>" class="wp-image-3427"&gt;<br/><br/>&lt;img title="<b>Bradley Dalina <strong>- Hello World - <?php bloginfo('name');?></strong></b>" src="<?php echo $uploads_dir;?>bradley-dalina.jpg" alt="<b>Bradley Dalina<strong> - Hello World - <?php bloginfo('name');?></strong></b>" class="wp-image-3427"&gt;</pre> -->
         <!--End Name/Title Settings-->
         <br/><br/><br/>
         <strong class="t-extra-title" style="display:block;">Extra Settings</strong>
