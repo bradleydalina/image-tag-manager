@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Image Tag Manager
  * Plugin URI:        http://wordpress.org/plugins/image-tag-manager/
- * Description:       Simple image (alt, title, caption and description) tag generator for SEO enhancement
+ * Description:       The Image Tag Manager plugin allows you to dynamically insert a more valid (alt, title) tag attribute to your images for SEO enhancement.
  * Version:           1.0
  * Requires at least: 5.3
  * Requires PHP:      7.0
