@@ -1,55 +1,69 @@
-t301.ready(function(){
-        const tab = t301.classes('.t-tab');
-        const activetab = window.location.hash;
-        if(activetab){
-            t301.query('a.t-tab.t-active-tab').classList.remove('t-active-tab');
-            t301.query('.t-tabs.t-show').classList.add('t-hide');
-            t301.query('.t-tabs.t-hide.t-show').classList.remove('t-show');
-
-            t301.query('a[href="'+activetab+'"]').classList.add('t-active-tab');
-            t301.id(activetab).classList.add('t-show');
-            t301.id(activetab).classList.remove('t-hide');
-        }
-        for(let i =0; i < tab.length; i++){
-            tab[i].onclick = function(e){
-                e.preventDefault();
-                t301.query('a.t-tab.t-active-tab').classList.remove('t-active-tab');
-                t301.query('.t-tabs.t-show').classList.add('t-hide');
-                t301.query('.t-tabs.t-hide.t-show').classList.remove('t-show');
-
-                this.classList.add('t-active-tab');
-                if(t301.id(this.getAttribute('href'))){
-                    t301.id(this.getAttribute('href')).classList.add('t-show');
-                    t301.id(this.getAttribute('href')).classList.remove('t-hide');
-                }
-                if(t301.query('.t-message-box')){
-                    t301.query('.t-message-box').remove();
-                }
-            }
-        }
-        if(t301.id('add_class')){
-            if(t301.id('add_class').checked){
-                t301.id('default_class').parentNode.style.display='flex';
-            }
-            else{
-                t301.id('default_class').parentNode.style.display='none';
-            }
-            t301.id('add_class').addEventListener('change', function(event){
-                if (event.target.checked){
-                    t301.id('default_class').parentNode.style.display='flex';
-                }
-                else{
-                    t301.id('default_class').parentNode.style.display='none';
-                }
+t301.ready(function() {
+    /* On window load */
+    function strCapitalize(str){
+        /* Capitalized Per Word */
+        return str.replace(/\b(\w)/g, function (match) {
+                return match.toUpperCase();
             });
-        }
-        if(t301.id('default_class')){
-            t301.id('default_class').value = t301.id('default_class').value.replace(/[^a-z0-9-_\s]/gmi, '');
-            t301.id('default_class').value = t301.id('default_class').value.replace(/\s\s+/g, ' ');
-            t301.id('default_class').addEventListener('input', function(event){
-                t301.id('default_class').value = this.value.replace(/[^a-z0-9-_\s]/gmi, '');
-                t301.id('default_class').value = this.value.replace(/\s\s+/g, ' ');
-            });
+    }
+    function standardizedName(img){
+        /* Transform image source filename into a valid title and alt tag value */
+        let img_title = img.title;
+        let img_alt = img.alt;
+        let img_name = img.src;
+                       //this removes the anchor at the end, if there is one
+            img_name = img_name.substring(0, (img_name.indexOf("#" == -1) ? img_name.length : img_name.indexOf("#")));
+                       //this removes the query after the file name, if there is one
+            img_name = img_name.substring(0, (img_name.indexOf("?") == -1) ? img_name.length : img_name.indexOf("?"));
+                       //this removes everything before the last slash in the path
+            img_name = img_name.substring(img_name.lastIndexOf('/')+1);  //img.src.replace(/^.*[\\\/]/, '');
+
+            img_name = (img_name.indexOf('.')!=-1) ? img_name.split('.').slice(0, -1).join('.') : img_name;
+            if(parseInt(ITMplugin.options['strip_numbers'])==1){
+                img_name= img_name.replace(/\s{0,}\d{1,}?\s{0,}x?\s{0,}\d{1,}?\s{0,}?/gmi, '');
+                /* Remove any non-word chacacter accepts [a-zA-Z0-9]*/
+                img_name= img_name.replace(/[0-9]/gmi, '');
+            }
+            img_name= img_name.replace(/[^\w]/gmi, ' ');
+            /* Remove multiple underscore & hypens */
+            img_name= img_name.replace(/\s*[-_\s]+\s*/gmi, ' ');
+            /* Remove multiple spaces & tabs */
+            img_name= img_name.replace(/\s\s+/gmi, ' ');
+            /* Trim spaces in the start and end of string */
+            img_name= img_name.trim();
+
+            if(img_name.split("").length < 3){
+                if(parseInt(ITMplugin.options['use_post_title_as_default'])==1){
+                    if(ITMplugin.options['post_title']!==''){
+                        img_name = ITMplugin.options['post_title'];
+                    }
+                    else{
+                        img_name = ITMplugin.options['blog_name'];
+                    }
+                }
+            }
+
+            /* Verify title tag and replace with a valid title */
+            if(img_title=== 'null' || img_title === 'undefined' || img_title===''){
+                img.title = strCapitalize(img_name);
+            }
+            else if(strCapitalize(img_title)!=strCapitalize(img_name)){
+                img.title = strCapitalize(img_name);
+            }
+            /* Verify alt tag and replace with a valid alt */
+            if(img_alt === 'null' || img_alt === 'undefined' || img_alt===''){
+                img.alt = strCapitalize(img_name);
+            }
+            else if(strCapitalize(img_alt)!=strCapitalize(img_name)){
+                img.alt=strCapitalize(img_name);
+            }
+    }
+
+    const images = t301.queries('img');
+    if(images){
+        /* Loop images and verify each */
+        for(let x = 0; x < images.length; x++) {
+            standardizedName(images[x]);
         }
     }
-);
+});

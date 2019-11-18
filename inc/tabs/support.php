@@ -4,7 +4,7 @@
         <br/>
         <span>Please <strong><a rel="referrer" target="_blank" href="<?php echo VIRGO_URI;?>#reviews">Rate</a></strong> the plugin base on its purpose and usage if it works, and write a <strong><a rel="referrer" target="_blank" href="<?php echo VIRGO_URI;?>">Review</a></strong> for continues plugin improvement. </span>
         <span><strong><a rel="referrer" target="_blank" href="<?php echo "https://wordpress.org/support/plugin/".VIRGO_TITM."/";?>">Submit</a></strong> or report any errors/bugs for fixes.</span>
-        <br/><br/><strong><a rel="referrer" target="_blank" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QX8K5XTVBGV42&source=url">Donate</a></strong> to support continues free useful plugin development.
+        <br/><br/><strong><a rel="referrer" target="_blank" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QX8K5XTVBGV42&source=url">Donate</a></strong> to support continues plugin development for free.
         <br/><br/>
         <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
         <input type="hidden" name="cmd" value="_s-xclick" />

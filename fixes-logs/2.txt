@@ -1,0 +1,103 @@
+
+TRACE LOG
+
+-----------------------------------------------
+## Calling core loading files directly
+-----------------------------------------------
+Including wp-config.php, wp-blog-header.php, wp-load.php directly via an include is not permitted.
+
+Before:
+
+> image-tag-manager-master/image-tag-manager.php:43: require_once( ABSPATH . "wp-load.php" );
+
+After: Remove
+
+-----------------------------------------------
+## Generic function (and/or define) names
+-----------------------------------------------
+All plugins must have unique function names, namespaces, defines, and classnames. This prevents your plugin from conflicting with other plugins or themes. We need you to update your plugin to use more unique and distinct names.
+
+A good way to do this is with a prefix. For example, if your plugin is called "Easy Custom Post Types" then you could use names like these:
+
+    function ecpt_save_post()
+    define( ‘ECPT_LICENSE’, true );
+    class ECPT_Admin{}
+    namespace EasyCustomPostTypes;
+
+Before:
+
+image-tag-manager-master/image-tag-manager.php:57: class ___ITMPlugin{
+image-tag-manager-master/inc/tabs/tag-settings.php:9:class ___ITMPluginSettings {
+
+After:
+> Updated All class in accordance with wordpress stardard
+> Updated All function names into CamelCase and remove underscore prefix and suffix
+
+image-tag-manager-master/image-tag-manager.php:37: class ITMPlugin{
+image-tag-manager-master/inc/tabs/tag-settings.php:9:class ITMPluginSettings {
+
+
+-----------------------------------------------
+## Ajax
+-----------------------------------------------
+> This plugin did not use ajax request,
+> It localize a javascript in order to access the plugin settings via localized script but not requiring an ajax request.
+
+Below is the code block:
+
+    image-tag-manager.php > line: 215
+    ---------------------------------
+
+    public function FrontScripts($hook_suffix) {
+        /**
+        * Plugin FrontEnd Scripts and Styles Inclusion
+        */
+        wp_enqueue_script('terebra_achates', ITM_ABSPATH.'js/terebra-achates.js', null, 1.0, true);
+        $ITMSettings = array(
+            "image_caption"=>$this->image_caption,
+            "image_description"=>$this->image_description,
+            "strip_numbers"=>$this->strip_numbers,
+            "use_post_title_as_default"=>$this->use_post_title_as_default,
+            // "add_blog_name"=>$this->add_blog_name,
+            // "add_post_title"=>$this->add_post_title,
+            "add_class"=>$this->add_class,
+            "default_class"=>$this->default_class,
+            "remove_srcset_sizes"=>$this->remove_srcset_sizes,
+            'blog_name'=>get_bloginfo('name'),
+            'post_title'=>get_the_title()
+        );
+        $localize = array(
+            'ajaxurl' => admin_url( 'admin-ajax.php' ),
+            "nonce"=>wp_create_nonce("nonce"),
+            "siteurl"=>get_site_url(),
+            "options"=>$ITMSettings
+        );
+        /**
+        * Localize this js for the purpose that the plugin settings can be access locally by the js and can read the json data
+        * But this does not requires ajax request
+        */
+        wp_enqueue_script('ITM_plugin', ITM_ABSPATH.'js/itm-plugin.js', array('terebra_achates', 'wp-util', 'json2'), 1.0, true);
+        wp_localize_script( 'ITM_plugin', 'ITMplugin', $localize );
+    }
+
+
+    itm-plugin.js > line: 22
+    ---------------------------------
+    if(parseInt(ITMplugin.options['strip_numbers'])==1){
+        img_name= img_name.replace(/\s{0,}\d{1,}?\s{0,}x?\s{0,}\d{1,}?\s{0,}?/gmi, '');
+        /* Remove any non-word chacacter accepts [a-zA-Z0-9]*/
+        img_name= img_name.replace(/[0-9]/gmi, '');
+    }
+
+    itm-plugin.js > line: 35
+    ---------------------------------
+    if(img_name.split("").length < 3){
+        if(parseInt(ITMsettings.options['use_post_title_as_default'])==1){
+            if(ITMsettings.options['post_title']!==''){
+                img_name = ITMsettings.options['post_title'];
+            }
+            else{
+                img_name = ITMsettings.options['blog_name'];
+            }
+        }
+    }

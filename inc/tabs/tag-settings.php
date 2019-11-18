@@ -6,36 +6,25 @@ defined( 'ABSPATH' ) or die( 'The wrong way access...' );
 /**
 * Main Class
 */
-class ___ITMPluginSettings {
+class ITMPluginSettings {
     public function __construct() {
         /**
         * Check for post action
         */
         if ( ! empty( $_POST ) && isset( $_POST['ITMPlugin_action'] ) ) {
-            $this->__HandleForm();
+            $this->HandleForm();
         }
         /**
         * Show the form
         */
-        $this->__RenderForm();
+        $this->RenderForm();
     }
 
-    public function __HandleForm() {
+    public function HandleForm() {
         /**
         * Verify user permission and access level
         */
-        if ( ! is_user_logged_in() ) {
-            add_action( 'admin_menu', array($this,'__RemoveMenu') );
-            wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
-        }
-        if ( !current_user_can( 'manage_options' ) ) {
-            add_action( 'admin_menu', array($this,'__RemoveMenu') );
-            wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
-        }
-        if ( ! is_admin() ) {
-            add_action( 'admin_menu', array($this,'__RemoveMenu') );
-            wp_die( __( 'You do not have sufficient permissions to access this page. Please contact your administrator.' ) );
-        }
+        ITMPlugin::Authorize();
         /**
         * Verify nonce submitted within the form
         */
@@ -58,7 +47,7 @@ class ___ITMPluginSettings {
 
             $strip_numbers = intval($_POST['strip_numbers']);
             $use_post_title_as_default = intval($_POST['use_post_title_as_default']);
-            // $add_blog_name = intval($_POST['add_blog_name']);            
+            // $add_blog_name = intval($_POST['add_blog_name']);
             // $add_post_title = intval($_POST['add_post_title']);
 
             $add_class = intval($_POST['add_class']);
@@ -90,7 +79,7 @@ class ___ITMPluginSettings {
         }
     }
 
-    public function __RenderForm() {
+    public function RenderForm() {
         ?>
         <form id="tag-settings" class="t-tabs t-show" method="POST">
             <h2>Plugin Settings</h2>
@@ -165,4 +154,4 @@ class ___ITMPluginSettings {
 /**
 * Initialized
 */
-$__SettingsCLS = new ___ITMPluginSettings();
+$ITMPluginSettings = new ITMPluginSettings();
