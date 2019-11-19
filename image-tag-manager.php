@@ -2,10 +2,12 @@
 /**
  * Plugin Name:       Image Tag Manager
  * Plugin URI:        http://wordpress.org/plugins/image-tag-manager/
- * Description:       The Image Tag Manager plugin allows you to dynamically insert a more valid (alt, title) tag attribute to your (***all or any except iframe) images in your site for SEO enhancement.
+ * Description:       Image Tag Manager is a WordPress plugin that allows to dynamically generates (alt, title, caption and description) in ***all or any images (except iframes content) for SEO enhancement.
  * Version:           1.0
- * Requires at least: 5.3
- * Requires PHP:      7.0
+ * Requires at least: 4.6
+ * Tested up to:      5.3
+ * Stable tag:        1.0
+ * Requires PHP:      5.2.4
  * Author:            Bradley B. Dalina
  * Author URI:        https://www.bradley-dalina.tk/
  * License:           GPL v2 or later
