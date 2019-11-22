@@ -2,7 +2,7 @@
 /**
  * Restrict Direct Access
  */
-defined( 'ABSPATH' ) or die( 'The wrong way access...' );
+defined( 'ABSPATH' ) or die( 'You\'re in the wrong way of access...' );
 /**
 * Plugin Constants
 */

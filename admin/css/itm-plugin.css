@@ -1,0 +1,43 @@
+input,
+input[type='text'],
+input[type='number'],
+input[type='email'],
+input[type='url'],
+select, textarea{ border: solid 1px #bbb; resize:none; outline:0; }
+input:focus,
+input[type='text']:focus,
+input[type='number']:focus,
+input[type='email']:focus,
+input[type='url']:focus,
+select:focus, textarea:focus{  border: solid 1px #999; resize:none; outline:0; box-shadow: unset;}
+input[type='checkbox'], input[type='color']{margin-right:10px;}
+pre.code { margin: 0; padding: 20px;background-color:#e0e0e0; white-space: pre-wrap; border: solid 1px #b9b9b9;}
+div.demo { padding: 20px;background-color: #f1f1f1; max-height:300px; overflow: auto; border: solid 1px #b9b9b9;}
+pre.demo { margin:0; padding: 20px;background-color: #e6eef1; white-space: pre-wrap;}
+div.demo ul, div.demo h3:first-child{padding-top:0px; margin-top:0px; }
+small.guide{display:block; padding: 5px 0; font-size:.7.5rem;}
+small.guide b{font-weight:700; color:#ff0000;}
+
+#wpbody *{outline:0;}
+#wpbody a, #wpbody a:visited, #wpbody a:hover{text-decoration:none; outline:0;color:#0073aa; box-shadow: none;}
+#wpbody span.delete a, #wpbody span.delete  a:visited, #wpbody span.delete  a:hover{color: #a00;}
+#wpbody a.button-primary{color:#fff;}
+#wpbody h2{display:flex;align-items:center;}
+#wpbody h2 a{color:#0073aa;}
+#wpbody p{margin: 5px 0 20px 0;}
+#wpbody span.notice{display: flex;align-items: center;}
+#wpbody span.notice p {margin: 6px 0;}
+#wpbody span.notice.success{border-left-color: #46b450;}
+#wpbody span.notice.error{border-left-color: #ff0000;;}
+#wpbody h2 small {font-size: 14px;margin: 0 15px;}
+#wpbody nav {display: inline-flex;align-items: baseline;}
+#wpbody nav a{margin-left:15px;}
+#wpbody .itm-wrap b{color:#ff0000;}
+#wpbody .itm-wrap strong{color:#0073aa;}
+
+.red{color:#ff0000;}
+.itm-wrap{background:#ECECEC;border:1px solid #CCC;padding:15px;margin-top:5px;}
+.formgroup{display:flex; width:100%; margin: 10px 0; flex-direction: column;}
+.formgroup.inline{flex-direction: row-reverse;align-items: center;justify-content: flex-end;}
+.formgroup label{margin-bottom:5px; font-weight:500;}
+.float-right{float:right;}

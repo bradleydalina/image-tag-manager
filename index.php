@@ -1,1 +1,1 @@
-<?php die('The wrong way access...'); ?>
+<?php die( 'You\'re in the wrong way of access...' ); ?>
