@@ -1,10 +1,10 @@
 === Image Tag Manager ===
 Contributors: bradleydalina
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QX8K5XTVBGV42&source=url
-Tags: seo, seo-image, image, image-tag, img-tag, media, tag, seo-optimize, title, alt, alternative text,image-title, image-alt
+Tags: image, image-tag-manager, image tag manager, image-title, image-alt, img-tag, media, tag, seo-optimize,seo,  seo-image,  title, alt, alternative text
 Requires at least: 4.6
 Tested up to: 5.3
-Stable tag: 1.0
+Stable tag: 1.3
 Requires PHP: 5.2.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -13,23 +13,63 @@ This plugin allows you to dynamically generates (alt, title, caption and descrip
 
 == Description ==
 
-Image Tag Manager is a WordPress plugin that allows to dynamically generates (alt, title, caption and description) in ***all or any images (except iframes content) for SEO enhancement.
-It also fixed the filenames before saving, removing unnecessary characters to transform into more meaningful filename and SEO friendly.
+Image Tag Manager is a WordPress plugin that allows to dynamically generates (alt, title, caption and description) in images (except iframes content) for SEO enhancement.
+It also fixed the filenames before saving, removing unnecessary characters to transform into more meaningful and SEO friendly filename.
 
-"This plugin will is limited with its available settings. Before writing a reviews, please *mention that you read the whole description* and clearly understand the limit and usage of the plugin."
+"This plugin will is limited with its available settings. Before writing a review, please *mention that you read the whole description* and clearly understand the limit and usage of the plugin."
 
-1. During image upload, the plugin automatically renames the image filename into SEO friendly pattern by removing unnecessary characters.
-1. Plugin uses the filename as primary meta-data reference for alt, title, caption and description but has an option to add the attachment post/page title.
+NOTE: Please always read the changelog for the plugin updates.
 
 **Plugin Options**
 
-* Strip numbers in the image alt or title (optional)
-* Can use the post title or page title as fall-back for alt and title attribute if the image filename does not contain more than 3 letter to be meaning or image has numbers as its name (optional)
-* Can Add post/page title to the image alt or title attribute, if title already exists in the attribute it will be skip
-* Can Override the alt or title attribute.
-* Can Remove words in the title or alt attribute base on the specified sets.
-* Can add default image class attribute values in the entry-post section or articles.
-* Can Remove srcset and sizes attributes in the entry-post section or articles.
+**Basic**
+* On upload image file
+  * Set image alt (Default)
+  * Set image title (Default)
+  * Set image caption (optional)
+  * Set image description (optional)
+
+**Alt/Title**
+* Override Settings
+  * Override Alt ( Overrides the current/existing alt attributes of the image )
+  * Override Title ( Overrides the current/existing title attributes of the image )
+* Additional String in Attributes, Applicable inside the entry post content or page articles only
+  * Use bar ( | ) instead of hypen ( - )
+  * Add Post/Page title to image alt attributes ( Ex: Image Alt - Post Title )
+  * Add Post/Page title to image title attributes ( Ex: Image Title - Post Title )
+  * Add Post/Page first category to image alt attributes ( Ex: Image Alt - Category )
+  * Add Post/Page first category to image title attributes ( Ex: Image Title - Category )
+* Character or String Removal in Attributes (Global)
+  * Enable String Trimmer ( This allows you to trim/remove any part of the string from the alt or title attributes )
+  * Remove or trim this words if found from the alt attributes ( Separated by comma )
+  * Remove or trim this words if found from the title attributes ( Separated by comma )
+
+**Word Settings**
+* Special/Nonword Character Preservations
+  * Clean All ( Remove any nonword characters in the entire string of the Alt/Title Attributes )
+  * Preserved All ( Preserved the entire string characters in the Alt/Title Attributes special or nonword characters including numbers)
+  * Preserved Special ( Preserved special or nonword characters and make stripping numbers optional in the Alt/Title Attributes )
+* Numerical Character Preservations
+  * Strip Numbers ( Remove numbers in the filename: "filename 300x450.jpg" becomes "filename" )
+  * Use Post/Page title as fallback to image attributes ( For randomly generated filenames like 1127.jpg or with less than 3 letters and image is not attached in a post)
+* String Case Manipulation
+  * Leave Unchanged
+  * Lowercase ( Alt/Title Attributes will be converted to lowercase )
+  * Uppercase ( Alt/Title Attributes will be converted to uppercase )
+  * Capitalized ( Alt/Title Attributes will be capitalized each word )
+  * Sentence Case ( Alt/Title Attributes will transform the first letter of the first word only )
+
+**Extra**
+* Add default class ( class="your-default-class" )
+  * Global (Throughout the site )
+  * Entry Post Section ( Applies in the entry post section only )
+  * Default Class ( Separated by single space )
+* Disable Srcset and sizes
+  * Remove srcset & sizes attribute ( Get rid of srcset="" sizes="" attribute )
+
+**advance**
+* Applicable only on the post content generated by wordpress from content editor. The hardcoded image can't be save in the database.
+  * Use data saving attributes ( This will be saved along with the post content and can work even when the plugin was removed. )
 
 == Installation ==
 
@@ -47,20 +87,17 @@ e.g.
 This plugin has an options, the `data_saving` which can be found in the under > Media> Image Tag manager > plugin settings.
 
 * The **Data Saving** option applies on before saving of any post type e.g( pages, post ) so the the attributes will be saved along with the content in the database, and when you remove this plugin the (title) attribute will remain. However Gutenberg content editor does not recognized title as a valid attribute in an image tag.
-* While setting this option to false does not applies the above procedure, it only filters the content before it renders the page using wordpress filter hooks. So this does not affects your database or modify the original content of your post. This can be more safer if you don't want this plugin applies changes to your original post. But when you remove this plugin the alt and title attributes will no longer take effect unless you do it manually or use another plugin.
+* While setting this option to false, it only filters the content before it renders the page using wordpress filter hooks. So this does not affects your database or modify the original content of your post. But when you remove this plugin the title attributes will no longer take effect unless you do it manually or use another plugin.
 
 = Does it applies in * all images in the website? =
 
-Yes! Though the wordpress hooks used in this plugin to filter the contents of the post is limited only within the entry post section, this plugin has a javascript fallback function that captures all images that can be scanned within the page will have the same filter as the php hook patterns used in the entry post section.
-So your logo's, footer badges can also have the alt's and title attributes.
+Yes! It captures all images that can be scanned within the page. So your logo's, footer badges can also have the alt's and title attributes. Please also note that there are some filters which are not applicable globally like adding the category of the post, it is only applicable in the post content images.
 
 = What happens to the image `old or original` attributes? =
 
 This plugin has an override option if you want to override the old/original/current alt's and title attributes of the image. If set to false the plugin will skip the image will has already alt and title attributes.
 e.g
 
-Before Override Set False: src="my-profile 250x250.jpg" alt="my-profile 250x250" title="my-profile 250x250"
-After Override Set True : src="my-profile 250x250.jpg" alt="My Profile" title="My Profile"
 
 == Screenshots ==
 
@@ -74,6 +111,21 @@ After Override Set True : src="my-profile 250x250.jpg" alt="My Profile" title="M
 
 = 1.0 =
 * Initial release
+= 1.1 =
+* Added Character Preservation Options (Clean All, Preserved All, Preserved Special)
+* Added String Separator
+* Added String Case Option (Unchange, Lowercase, Uppercase, Capitalized and Sentence Case)
+* Make JS filter optional with logs
+* Make the image post title as the primary source for alt and title attribute and make the image filename as fallback.
+  (This is based on wordpress meta data generated from image exif info.)
+= 1.2 =
+* Updated and fixed register_activation_hook (initialized option values)
+* Updated and fixed register_uninstall_hook (delete option values)
+= 1.3 =
+* UI Design updated
+* Added Network Multisite Support
+* Added Post Category options
+
 
 == Upgrade Notice ==
 
