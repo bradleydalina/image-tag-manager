@@ -16,7 +16,7 @@ This plugin allows you to dynamically generates (alt, title, caption and descrip
 Image Tag Manager is a WordPress plugin that allows to dynamically generates (alt, title, caption and description) in images (except iframes content) for SEO enhancement.
 It also fixed the filenames before saving, removing unnecessary characters to transform into more meaningful and SEO friendly filename.
 
-"This plugin will is limited with its available settings. Before writing a review, please *mention that you read the whole description* and clearly understand the limit and usage of the plugin."
+"This plugin is limited with its available settings. Before writing a review, please *mention that you read the whole description* and clearly understand the limit and usage of the plugin."
 
 NOTE: Please always read the changelog for the plugin updates.
 
@@ -96,7 +96,6 @@ Yes! It captures all images that can be scanned within the page. So your logo's,
 = What happens to the image `old or original` attributes? =
 
 This plugin has an override option if you want to override the old/original/current alt's and title attributes of the image. If set to false the plugin will skip the image will has already alt and title attributes.
-e.g
 
 
 == Screenshots ==
