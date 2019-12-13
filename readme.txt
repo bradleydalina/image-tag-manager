@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: image, image-tag-manager, image tag manager, image-title, image-alt, img-tag, media, tag, seo-optimize,seo,  seo-image,  title, alt, alternative text
 Requires at least: 4.6
 Tested up to: 5.3
-Stable tag: 1.3
+Stable tag: 1.4
 Requires PHP: 5.2.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
