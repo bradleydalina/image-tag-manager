@@ -124,7 +124,8 @@ This plugin has an override option if you want to override the old/original/curr
 * UI Design updated
 * Added Network Multisite Support
 * Added Post Category options
-
+= 1.4 =
+* Fix parent post
 
 == Upgrade Notice ==
 
