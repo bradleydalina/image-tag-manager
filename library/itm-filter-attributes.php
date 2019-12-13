@@ -290,6 +290,7 @@ defined( 'ABSPATH' ) or die( 'You\'re in the wrong way of access...' );
  }
  if(!function_exists('itm_filter_apply_entry_post_replace')){
     function itm_filter_apply_entry_post_replace($image_row) {
+        global $post;
         $itm_override_alt = false;
         $itm_override_title = false;
         $itm_add_class = false;
@@ -338,14 +339,17 @@ defined( 'ABSPATH' ) or die( 'You\'re in the wrong way of access...' );
             if(!$image_id){
                 $image_info =pathinfo($image_url[0]);
                 $base_url = $image_info['dirname'];
-                $base_filename = $image_info['basename'];
-                $base_filename = preg_replace( '%\s{0,}\d{1,}?\s{0,}x?\s{0,}\d{1,}?\s{0,}?%smiU', ' ',  $base_filename );
+                $base_filename = $image_info['filename'];
+                $base_filename = preg_replace( '%\s{0,}\d{1,}?\s{0,}x?\s{0,}\d{1,}?\s{0,}?%smiU', '',  $base_filename );
+                $base_filename = (substr($base_filename, strlen($base_filename)-2,1)=='-') ? substr_replace($base_filename, "", strlen($base_filename)-2,1) : $base_filename;
+                $base_filename = $base_filename .'.'.$image_info['extension'];
                 $image_id = attachment_url_to_postid(trailingslashit($base_url).$base_filename);
             }
         }
+
         //return $image_id;
         // get the image post parent
-        $post_parent = get_post( $image_id )->post_parent;
+        $post_parent = ( get_post( $image_id )->post_parent ) ? get_post( $image_id )->post_parent : $post->ID;
         // get the image post parent title
         $post_title = ($post_parent) ? get_post( $post_parent )->post_title : '';
         $image_own_title = (!empty(get_post( $image_id )->post_title)) ? get_post( $image_id )->post_title : get_post( $image_id )->post_name;
